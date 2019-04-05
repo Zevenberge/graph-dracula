@@ -27,5 +27,13 @@ namespace Dracula.Domain
         {
             Nationality = newNationality;
         }
+
+        public void CorrectInformation(string name, 
+            DateTime? dateOfBirth, Country nationality)
+        {
+            Name = name ?? Name;
+            DateOfBirth = dateOfBirth ?? DateOfBirth;
+            Nationality = nationality ?? Nationality;
+        }
     }
 }

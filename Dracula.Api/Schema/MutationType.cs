@@ -16,6 +16,17 @@ namespace Dracula.Api.Schema
                 .Type<NonNullType<FilmType>>()
                 .Argument("data", a => a.Type<NonNullType<EditFilm.Type>>())
                 .Name("editFilm");
+
+            descriptor.Field<ActorResolver>(a => a.Create(default, default, default))
+                .Type<NonNullType<ActorType>>()
+                .Argument("data", a => a.Type<NonNullType<CreateActor.Type>>())
+                .Name("createActor");
+
+            descriptor.Field<ActorResolver>(g => g.Edit(default, default, default))
+                .Type<NonNullType<ActorType>>()
+                .Argument("data", a => a.Type<NonNullType<EditActor.Type>>())
+                .Name("editActor");
+
         }
 
     }

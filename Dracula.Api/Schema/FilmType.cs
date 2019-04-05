@@ -19,9 +19,9 @@ namespace Dracula.Api.Schema
             descriptor.Field(a => a.ReleaseYear)
                 .Type<NonNullType<IntType>>();
 
-            //descriptor.Field(a => a.Country.Name)
-            //    .Type<NonNullType<StringType>>()
-            //    .Name("country");
+            descriptor.Field(a => a.Country)
+                .Type<NonNullType<CountryType>>()
+                .Name("country");
 
             descriptor.Field<ActorResolver>(r => r.GetActors(default, default))
                 .Type<ListType<ActorType>>()

@@ -23,7 +23,16 @@ namespace Dracula.Repository.Impl
 
         public async Task<Actor> GetById(Guid id)
         {
-            return await _dbContext.Actor.FindAsync(id);
+            return await _dbContext.Actor
+                .Include(a => a.Nationality)
+                .FirstAsync(a => a.Id == id);
+        }
+
+        public async Task<IEnumerable<Actor>> Get(int begin, int amount)
+        {
+            return await _dbContext.Actor
+                .Include(f => f.Nationality)
+                .Skip(begin).Take(amount).ToListAsync();
         }
 
         public async Task<IEnumerable<Actor>> GetCast(Film film)
@@ -31,6 +40,7 @@ namespace Dracula.Repository.Impl
             return await _dbContext.Casting
                 .Where(c => c.Film == film)
                 .Select(c => c.Actor)
+                .Include(a => a.Nationality)
                 .ToListAsync();
         }
     }

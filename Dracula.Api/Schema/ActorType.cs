@@ -19,9 +19,9 @@ namespace Dracula.Api.Schema
             descriptor.Field(a => a.DateOfBirth)
                 .Type<NonNullType<DateType>>();
 
-            //descriptor.Field(a => a.Nationality.Name)
-            //    .Type<NonNullType<StringType>>()
-            //    .Name("nationality");
+            descriptor.Field(a => a.Nationality)
+                .Type<NonNullType<CountryType>>()
+                .Name("nationality");
 
             descriptor.Field<FilmResolver>(r => r.GetFilms(default, default))
                 .Type<ListType<FilmType>>()
