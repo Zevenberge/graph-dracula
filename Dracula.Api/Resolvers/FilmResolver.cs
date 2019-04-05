@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Dracula.Api.Schema;
 using Dracula.Domain;
 using Dracula.Repository;
@@ -9,35 +10,31 @@ namespace Dracula.Api.Resolvers
 {
     public class FilmResolver
     {
-        public IEnumerable<Film> GetFilms([Parent]Actor actor,
+        public async Task<IEnumerable<Film>> GetFilms([Parent]Actor actor,
             [Service]IFilmRepository repository)
         {
-            return repository.GetFilmeography(actor)
-                .ConfigureAwait(false).GetAwaiter().GetResult();
+            return await repository.GetFilmeography(actor);
         }
 
-        public IEnumerable<Film> GetAll([Service] IFilmRepository repository)
+        public async Task<IEnumerable<Film>> GetAll([Service] IFilmRepository repository)
         {
-            return repository.Get(0, int.MaxValue)
-                .ConfigureAwait(false).GetAwaiter().GetResult();
+            return await repository.Get(0, int.MaxValue);
         }
 
-        public Film GetById(string id, [Service]IFilmRepository repository)
+        public async Task<Film> GetById(string id, [Service]IFilmRepository repository)
         {
             Console.WriteLine($"Getting film with ID {id}");
             var guid = Guid.Parse(id);
-            return repository.GetById(guid)
-                .ConfigureAwait(false).GetAwaiter().GetResult();
+            return await repository.GetById(guid);
         }
 
-        public Film Create(CreateFilm data, 
+        public async Task<Film> Create(CreateFilm data, 
             [Service]IFilmRepository repository,
             [Service]ICountryRepository countries)
         {
-            var country = countries.GetByIso(data.CountryIso)
-                .ConfigureAwait(false).GetAwaiter().GetResult();
+            var country = await countries.GetByIso(data.CountryIso);
             var film = new Film(data.Name, data.ReleaseYear, country);
-            repository.Add(film).ConfigureAwait(false).GetAwaiter().GetResult();
+            await repository.Add(film);
             return film;
         }
     }

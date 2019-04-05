@@ -9,7 +9,7 @@ namespace Dracula.Api.Schema
         {
             descriptor.Field<FilmResolver>(f => f.Create(default, default, default))
                 .Type<NonNullType<FilmType>>()
-                .Argument("data", a => a.Type<NonNullType<CreateFilmType>>())
+                .Argument("data", a => a.Type<NonNullType<CreateFilm.Type>>())
                 .Name("createFilm");
         }
 

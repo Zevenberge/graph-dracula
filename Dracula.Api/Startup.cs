@@ -53,8 +53,6 @@ namespace Dracula.Api
                 c.RegisterServiceProvider(sp);
                 c.RegisterQueryType<QueryType>();
                 c.RegisterMutationType<MutationType>();
-                c.RegisterType<ActorType>();
-                c.RegisterType<FilmType>();
             }), builder =>
                 builder.Use<TransactionMiddleware>()
                     .UseDefaultPipeline()
