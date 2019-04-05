@@ -1,44 +1,11 @@
 version: '3.4'
 
 services:
-#  amtrust.invoicing.api:
-#    image: amtrust.invoicing.api
-#    depends_on:     
-#     - sql.data
-#    environment:
-#      ASPNETCORE_ENVIRONMENT: "Development"
-#      ConnectionString: "Server=sql.data;Database=Invoicing;User=sa;Password=bV4URbLQrSHe8ww7;"
-#      LogPath: "/var/log/amtrust"
-#      IdentityServer:Url: "http://10.0.75.1:5002"
-#      IdentityServer:ApiKey: "3DB0F85E-8B01-48C4-927F-675342776015"
-#      DocumentsApi:Url: "http://amtrust.documents.api"
-#      CurrencyApi:Url: "http://amtrust.currency.api"
-#    volumes:
-#      - /c/temp/amtrust/containers/invoicing:/var/log/amtrust
-#    build:
-#      context: ./AmTrust.Invoicing.Api
-#      dockerfile: Dockerfile
-#      args:
-#        - source=./bin/Debug/netcoreapp2.1
-
   sql.data:
     image: "microsoft/mssql-server-linux:2017-GA"
     environment:
         SA_PASSWORD: "bV4URbLQrSHe8ww7"
         ACCEPT_EULA: "Y"
-    #volumes:
-    #  - /c/temp/amtrust/containers/invoicing/mssql:/var/opt/mssql
-    #  - /var/opt/mssql/data
     ports:
-      - 11433:1433
+      - 1433:1433
     network_mode: "bridge"
-    networks:
-      graph_dracula:
-        ipv4_address: 170.17.0.2
-
-networks:
-  graph_dracula:
-      ipam:
-          driver: default
-          config:
-            - subnet: 172.17.0.0/24
