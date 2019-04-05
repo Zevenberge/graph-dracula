@@ -16,7 +16,7 @@ namespace Dracula.Api.Schema
 
             descriptor.Field<FilmResolver>(r => r.GetById(default, default))
                 .Type<FilmType>()
-                .Argument("id", d => d.Description("Identifier of the film").Type<NonNullType<IdType>>())
+                .Argument("id", d => d.Description("Identifier of the film").Type<NonNullType<UuidType>>())
                 .Name("film");
 
         }

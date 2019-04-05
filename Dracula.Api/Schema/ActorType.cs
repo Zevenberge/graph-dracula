@@ -11,7 +11,7 @@ namespace Dracula.Api.Schema
             descriptor.BindFields(BindingBehavior.Explicit);
 
             descriptor.Field(a => a.Id)
-                .Type<NonNullType<IdType>>();
+                .Type<NonNullType<UuidType>>();
 
             descriptor.Field(a => a.Name)
                 .Type<NonNullType<StringType>>();

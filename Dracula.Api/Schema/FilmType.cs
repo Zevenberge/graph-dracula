@@ -11,7 +11,7 @@ namespace Dracula.Api.Schema
             descriptor.BindFields(BindingBehavior.Explicit);
 
             descriptor.Field(a => a.Id)
-                .Type<NonNullType<IdType>>();
+                .Type<NonNullType<UuidType>>();
 
             descriptor.Field(a => a.Name)
                 .Type<NonNullType<StringType>>();
@@ -27,21 +27,6 @@ namespace Dracula.Api.Schema
                 .Type<ListType<ActorType>>()
                 .Name("films");
 
-        }
-    }
-
-    public class CreateFilm
-    {
-        public string Name { get; set; }
-        public int ReleaseYear { get; set; }
-        public string CountryIso { get; set; }
-        public class Type : InputObjectType<CreateFilm>
-        {
-            protected override void Configure(IInputObjectTypeDescriptor<CreateFilm> descriptor)
-            {
-                descriptor.Field(t => t.Name).Type<NonNullType<StringType>>();
-                descriptor.Field(t => t.CountryIso).Type<NonNullType<StringType>>();
-            }
         }
     }
 }

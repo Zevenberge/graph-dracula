@@ -25,5 +25,12 @@ namespace Dracula.Domain
         public int ReleaseYear { get; private set; }
 
         public Country Country { get; private set; }
+
+        public void CorrectInformation(string name, int? releaseYear, Country country)
+        {
+            Name = name ?? Name;
+            ReleaseYear = releaseYear ?? ReleaseYear;
+            Country = country ?? Country;
+        }
     }
 }
