@@ -26,6 +26,11 @@ namespace Dracula.Repository.Impl
             return await _dbContext.Film.FindAsync(id);
         }
 
+        public async Task<IEnumerable<Film>> Get(int begin, int amount)
+        {
+            return await _dbContext.Film.Skip(begin).Take(amount).ToListAsync();
+        }
+
         public async Task<IEnumerable<Film>> GetFilmeography(Actor actor)
         {
             return await _dbContext.Casting

@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Dracula.Api.Schema;
 using Dracula.Repository;
 using Dracula.Repository.Impl;
+using HotChocolate;
+using HotChocolate.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -43,6 +46,13 @@ namespace Dracula.Api
             services.AddScoped<IActorRepository, ActorRepository>();
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<IFilmRepository, FilmRepository>();
+
+            services.AddGraphQL(sp => HotChocolate.Schema.Create(c => {
+                c.RegisterServiceProvider(sp);
+                c.RegisterQueryType<QueryType>();
+                c.RegisterType<ActorType>();
+                c.RegisterType<FilmType>();
+            }));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,13 +62,10 @@ namespace Dracula.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseHsts();
-            }
 
-            app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseDeveloperExceptionPage();
+            app.UseGraphQL();
+            app.UsePlayground();
         }
     }
 }

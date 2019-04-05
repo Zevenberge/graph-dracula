@@ -10,5 +10,6 @@ namespace Dracula.Repository
         Task<Film> GetById(Guid id);
         Task Add(Film film);
         Task<IEnumerable<Film>> GetFilmeography(Actor actor);
+        Task<IEnumerable<Film>> Get(int begin, int amount);
     }
 }
