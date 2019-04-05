@@ -28,6 +28,23 @@ namespace Dracula.Api.Schema
                 .Name("films");
 
         }
+    }
 
+    public class CreateFilm
+    {
+        public string Name { get; set; }
+        public int ReleaseYear { get; set; }
+        public string CountryIso { get; set; }
+
+    }
+
+    public class CreateFilmType : InputObjectType<CreateFilm>
+    {
+        
+        protected override void Configure(IInputObjectTypeDescriptor<CreateFilm> descriptor)
+        {
+            descriptor.Field(t => t.Name).Type<NonNullType<StringType>>();
+            descriptor.Field(t => t.CountryIso).Type<NonNullType<StringType>>();
+        }
     }
 }

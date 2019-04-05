@@ -14,9 +14,10 @@ namespace Dracula.Api.Schema
                 .Type<ListType<FilmType>>()
                 .Name("films");
 
-            //descriptor.Field<FilmResolver>(r => r.GetById(default, default))
-            //    .Type<FilmType>()
-            //    .Argument("id", d => d.Description("Identifier of the film").Type<NonNullType<IdType>>());
+            descriptor.Field<FilmResolver>(r => r.GetById(default, default))
+                .Type<FilmType>()
+                .Argument("id", d => d.Description("Identifier of the film").Type<NonNullType<IdType>>())
+                .Name("film");
 
         }
         
