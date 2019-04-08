@@ -45,6 +45,7 @@ namespace Dracula.Api
 
 
             services.AddScoped<IActorRepository, ActorRepository>();
+            services.AddScoped<ICastingRepository, CastingRepository>();
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<IFilmRepository, FilmRepository>();
 

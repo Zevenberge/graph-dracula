@@ -15,12 +15,6 @@ namespace Dracula.Api.Resolvers
             return await repository.Get(0, int.MaxValue);
         } 
 
-        public async Task<IEnumerable<Actor>> GetActors([Parent]Film film,
-            [Service]IActorRepository repository)
-        {
-            return await repository.GetCast(film);
-        } 
-
         public async Task<Actor> Create(CreateActor data, 
             [Service]IActorRepository repository,
             [Service]ICountryRepository countries)

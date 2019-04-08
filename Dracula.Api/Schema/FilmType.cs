@@ -23,9 +23,9 @@ namespace Dracula.Api.Schema
                 .Type<NonNullType<CountryType>>()
                 .Name("country");
 
-            descriptor.Field<ActorResolver>(r => r.GetActors(default, default))
-                .Type<ListType<ActorType>>()
-                .Name("films");
+            descriptor.Field<CastingResolver>(r => r.GetCast(default, default))
+                .Type<NonNullType<ListType<NonNullType<CastingType>>>>()
+                .Name("actors");
 
         }
     }

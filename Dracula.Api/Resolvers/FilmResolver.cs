@@ -10,12 +10,6 @@ namespace Dracula.Api.Resolvers
 {
     public class FilmResolver
     {
-        public async Task<IEnumerable<Film>> GetFilms([Parent]Actor actor,
-            [Service]IFilmRepository repository)
-        {
-            return await repository.GetFilmeography(actor);
-        }
-
         public async Task<IEnumerable<Film>> GetAll([Service] IFilmRepository repository)
         {
             return await repository.Get(0, int.MaxValue);
@@ -41,7 +35,7 @@ namespace Dracula.Api.Resolvers
             [Service]ICountryRepository countries)
         {
             Country country = null;
-            if(!string.IsNullOrWhiteSpace(data.CountryIso))
+            if (!string.IsNullOrWhiteSpace(data.CountryIso))
             {
                 country = await countries.GetByIso(data.CountryIso);
             }
