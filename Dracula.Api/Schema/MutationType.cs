@@ -27,6 +27,20 @@ namespace Dracula.Api.Schema
                 .Argument("data", a => a.Type<NonNullType<EditActor.Type>>())
                 .Name("editActor");
 
+            descriptor.Field<CastingResolver>(g => g.Create(default, default, default, default))
+                .Type<NonNullType<CastingType>>()
+                .Argument("data", a => a.Type<NonNullType<CreateCasting.Type>>())
+                .Name("createCasting");
+
+            descriptor.Field<CastingResolver>(g => g.Edit(default, default, default, default))
+                .Type<NonNullType<CastingType>>()
+                .Argument("data", a => a.Type<NonNullType<EditCasting.Type>>())
+                .Name("editCasting");
+
+            descriptor.Field<CastingResolver>(g => g.Delete(default, default))
+                .Type<NonNullType<UuidType>>()
+                .Argument("id", a => a.Type<NonNullType<UuidType>>())
+                .Name("deleteCasting");
         }
 
     }

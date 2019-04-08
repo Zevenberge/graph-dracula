@@ -17,5 +17,12 @@ namespace Dracula.Domain
         public Film Film { get; private set; }
         public Actor Actor { get; private set; }
         public Role Role { get; private set; }
+
+        public void CorrectData(Film film, Actor actor, Role? role)
+        {
+            Film = film ?? Film;
+            Actor = actor ?? Actor;
+            Role = role ?? Role;
+        }
     }
 }
