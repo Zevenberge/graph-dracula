@@ -1,0 +1,12 @@
+div
+    hidden(value="#{actor.id}")
+    label Name
+    input(type="text", value="#{actor.name}")
+    label Date of Birth
+    input(type="date", value="#{actor.dateOfBirth}")
+    ul
+        -foreach(film; actor.films)
+            li
+                div.title #{film.film.name}
+                div.year #{film.film.releaseYear}
+                div.role #{film.role}

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Dracula.Api.Schema;
@@ -9,13 +10,19 @@ namespace Dracula.Api.Resolvers
 {
     public class ActorResolver
     {
-       public async Task<IEnumerable<Actor>> GetAll(
-            [Service]IActorRepository repository)
+        public async Task<IEnumerable<Actor>> GetAll(
+             [Service]IActorRepository repository)
         {
             return await repository.Get(0, int.MaxValue);
-        } 
+        }
 
-        public async Task<Actor> Create(CreateActor data, 
+        public async Task<Actor> GetById(Guid id,
+            [Service]IActorRepository repository)
+        {
+            return await repository.GetById(id);
+        }
+
+        public async Task<Actor> Create(CreateActor data,
             [Service]IActorRepository repository,
             [Service]ICountryRepository countries)
         {
@@ -30,7 +37,7 @@ namespace Dracula.Api.Resolvers
             [Service]ICountryRepository countries)
         {
             Country nationality = null;
-            if(!string.IsNullOrWhiteSpace(data.Nationality))
+            if (!string.IsNullOrWhiteSpace(data.Nationality))
             {
                 nationality = await countries.GetByIso(data.Nationality);
             }

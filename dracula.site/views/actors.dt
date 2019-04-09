@@ -1,6 +1,8 @@
 extends layout
 
 block body
-    ul
-    - foreach(actor; actors)
-        li #{actor.name}
+    script(src='/scripts/actors.js', defer)
+    ul#actors.selectable
+        - foreach(actor; actors)
+            li(onclick="actorSelected('#{actor.id}')") #{actor.name}
+    #details

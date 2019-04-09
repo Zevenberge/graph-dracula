@@ -13,4 +13,11 @@ class ActorService
         auto actors = getActors;
         render!("actors.dt", actors);
     }
+
+    @path(":id")
+    void get(UUID _id)
+    {
+        auto actor = getActor(_id);
+        render!("actor-details.dt", actor);
+    }
 }

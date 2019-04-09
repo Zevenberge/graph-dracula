@@ -22,6 +22,11 @@ namespace Dracula.Api.Schema
             descriptor.Field<ActorResolver>(r => r.GetAll(default))
                 .Type<ListType<ActorType>>()
                 .Name("actors");
+
+            descriptor.Field<ActorResolver>(r => r.GetById(default, default))
+                .Type<ActorType>()
+                .Argument("id", d => d.Description("Identifier of the actor").Type<NonNullType<UuidType>>())
+                .Name("actor");
         }
         
     }
