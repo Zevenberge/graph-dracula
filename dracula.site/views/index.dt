@@ -1,0 +1,5 @@
+extends layout
+
+block body
+    p Welcome to Graph Dracula.
+    p The online GraphQL highly GDPR complient movie database.

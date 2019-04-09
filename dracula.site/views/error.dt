@@ -1,0 +1,7 @@
+extends layout
+
+block body
+    p Something went wrong.
+    p The request returned status #{error.code}.
+    p= error.message
+    p= error.debugMessage

@@ -1,0 +1,14 @@
+{
+	"authors": [
+		"Marco"
+	],
+	"copyright": "Copyright © 2019, Marco",
+	"description": "A minimal D application.",
+	"license": "proprietary",
+	"name": "dracula-site",
+	"dependencies": {
+		"vibe-d": "~>0.8.4",
+		"graphqld": "~>0.5.2"
+	},
+	"versions": ["VibeDefaultMain"]
+}
