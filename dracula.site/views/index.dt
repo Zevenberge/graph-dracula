@@ -1,5 +1,6 @@
 extends layout
 
 block body
+    script(src='scripts/index.js')
     p Welcome to Graph Dracula.
     p The online GraphQL highly GDPR complient movie database.

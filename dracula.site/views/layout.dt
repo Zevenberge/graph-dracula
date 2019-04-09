@@ -3,4 +3,7 @@ html
     head
         title Graph Dracula
     body
+        nav
+            a(href="/") Home
+            a(href="/actor/") Actors
         block body

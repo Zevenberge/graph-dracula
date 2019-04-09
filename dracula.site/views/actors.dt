@@ -1,0 +1,6 @@
+extends layout
+
+block body
+    ul
+    - foreach(actor; actors)
+        li #{actor.name}

@@ -1,26 +1,10 @@
-import std.stdio;
-
 import vibe.d;
+import dracula.site.startup.routing;
+import dracula.site.startup.settings;
 
 shared static this()
 {
-	import std.functional : toDelegate;
-	auto router = new URLRouter;
-	router.get("/", &index);
-	auto settings = new HTTPServerSettings;
-	settings.port = 8080;
-	settings.errorPageHandler = toDelegate(&errorPage);
+	auto router = configureRouter;
+	auto settings =	configureSettings;
 	listenHTTP(settings, router);
-}
-
-void index(HTTPServerRequest req, HTTPServerResponse res)
-{
-	res.render!("index.dt", req);
-}
-
-void errorPage(HTTPServerRequest req,
-	HTTPServerResponse res,
-	HTTPServerErrorInfo error)
-{
-	res.render!("error.dt", req, error);
 }
