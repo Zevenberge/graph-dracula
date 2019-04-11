@@ -1,0 +1,44 @@
+button {
+    background: midnightblue;
+    color: blanchedalmond;
+    border: antiquewhite;
+    border-width: thick;
+    border-style: solid;
+    padding: 10px;
+    margin: 8px;
+}
+
+button:hover {
+    background: lightyellow;
+    color: midnightblue;
+}
+
+#new {
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 90%;
+}
+
+li {
+    background: midnightblue;
+    color: blanchedalmond;
+    border: antiquewhite;
+    border-width: thick;
+    border-style: solid;
+    padding: 10px;
+    margin: 8px;
+}
+
+.selectable > li:hover {
+    background: lightyellow;
+    color: midnightblue;
+}
+
+ul {
+    list-style-type: none;
+    width: 30%;
+}
+
+#details {
+    width: 60%;
+}

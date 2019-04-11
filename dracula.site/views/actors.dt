@@ -1,6 +1,7 @@
 extends layout
 
 block body
+    link(rel= 'stylesheet', type='text/css', href='/styles/details.css')
     script(src='/scripts/actors.js', defer)
     button#new(onclick="createActor()") New actor
     ul#actors.selectable

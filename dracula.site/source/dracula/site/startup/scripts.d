@@ -5,10 +5,20 @@ import vibe.d;
 void addScripts(URLRouter router)
 {
     router.get("/scripts/*", &sendScript);
+    router.get("/styles/*", &sendCss);
 }
 
-
 private void sendScript(HTTPServerRequest req, HTTPServerResponse res)
+{
+    sendFile(req, res, "application/javascript");
+}
+
+private void sendCss(HTTPServerRequest req, HTTPServerResponse res)
+{
+    sendFile(req, res, "text/css");
+}
+
+private void sendFile(HTTPServerRequest req, HTTPServerResponse res, string contentType)
 {
     import std.algorithm : joiner;
     import std.array : array;
@@ -21,7 +31,7 @@ private void sendScript(HTTPServerRequest req, HTTPServerResponse res)
     {
         auto file = File(filename, "r");
         auto contents = file.byLine(Yes.keepTerminator).joiner("").array.to!string;
-        res.writeBody(contents, "application/javascript");
+        res.writeBody(contents, contentType);
     }
     else
     {

@@ -2,6 +2,7 @@ doctype html
 html
     head
         title Graph Dracula
+        link(rel= 'stylesheet', type='text/css', href='/styles/main.css')
     body
         nav
             a(href="/") Home

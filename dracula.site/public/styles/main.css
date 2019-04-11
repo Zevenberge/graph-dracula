@@ -1,0 +1,30 @@
+body {
+    background-color: midnightblue;
+}
+
+nav {
+    padding: 15px;
+    background-color: antiquewhite;
+    margin-bottom: 30px;
+}
+
+nav > a {
+    padding: 5px;
+    margin: 5px;
+    font-size: 20;
+    font-weight: bold;
+    border-style: solid;
+    border-color: black;
+    background-color: midnightblue;
+    color: blanchedalmond;
+}
+
+nav > a:hover {
+    background: lightyellow;
+    color: midnightblue;
+}
+
+p {
+    color: lemonchiffon;
+    margin: 9px;
+}
