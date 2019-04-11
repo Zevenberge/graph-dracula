@@ -1,0 +1,10 @@
+div
+    label Name
+    input#name(type="text", onchange="inputChanged('name', this.value)")
+    label Date of Birth
+    input#date(type="date", onchange="inputChanged('dateOfBirth', this.value)")
+    label Nationality
+    select#nationality(onchange="inputChanged('nationality', this.selectedOptions[0].value)")
+        -foreach(country; countries)
+            option(value="#{country.iso}") #{country.name}
+    button#submit(disabled, onclick="create(this)") Apply

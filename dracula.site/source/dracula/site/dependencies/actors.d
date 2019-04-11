@@ -4,6 +4,7 @@ import std.typecons;
 import std.uuid;
 import dracula.site.dependencies.graphql;
 import dracula.site.dto.actors;
+import dracula.site.dto.countries;
 
 ActorListItemDto[] getActors()
 {
@@ -47,6 +48,18 @@ ActorAndCountriesDto getActor(UUID id)
             }
     })(IdParameter(id));
     return ActorAndCountriesDto(result.actor, result.countries);
+}
+
+UUID createActor(CreateActorDto dto)
+{
+    auto result = query!(Tuple!(IdParameter, "createActor"), q{
+        mutation($data: CreateActorInput!) {
+            createActor(data: $data) {
+                id
+            }
+        }
+    })(DataParameter!CreateActorDto(dto));
+    return result.createActor.id;
 }
 
 void editActor(ChangeActorDto dto)

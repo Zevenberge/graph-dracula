@@ -4,6 +4,7 @@ import std.datetime;
 import std.typecons;
 import std.uuid;
 import vibe.data.serialization;
+import dracula.site.dto.countries;
 
 class ActorDetailsDto
 {
@@ -20,12 +21,6 @@ class ActorListItemDto
     string name;
 }
 
-class CountryDto
-{
-    string iso;
-    string name;
-}
-
 class PlayDto
 {
     string role;
@@ -37,6 +32,13 @@ class FilmDto
     UUID id;
     string name;
     int releaseYear;
+}
+
+class CreateActorDto
+{
+    string name;
+    Date dateOfBirth;
+    string nationality;
 }
 
 class ChangeActorDto

@@ -2,6 +2,7 @@ extends layout
 
 block body
     script(src='/scripts/actors.js', defer)
+    button#new(onclick="createActor()") New actor
     ul#actors.selectable
         - foreach(actor; actors)
             li(onclick="actorSelected('#{actor.id}')") #{actor.name}

@@ -4,6 +4,7 @@ import std.uuid;
 import vibe.web.common;
 import vibe.web.web;
 import dracula.site.dependencies.actors;
+import dracula.site.dependencies.countries;
 import dracula.site.dto.actors;
 
 @path("/actor")
@@ -25,15 +26,28 @@ class ActorService
         auto countries = result.countries.sort!((a, b) => a.name < b.name);
         render!("actor-details.dt", actor, countries);
     }
+
+    void getNew()
+    {
+        auto countries = getCountries();
+        render!("actor-create.dt", countries);
+    }
 }
 
 @path("/api/actor")
 interface IActorApi
 {
+    UUID postCreate(CreateActorDto dto);
     void postEdit(ChangeActorDto dto);
 }
 class ActorApi : IActorApi
 {
+    @bodyParam("dto")
+    UUID postCreate(CreateActorDto dto)
+    {
+        return createActor(dto);
+    }
+
     @bodyParam("dto")
     void postEdit(ChangeActorDto dto)
     {
