@@ -17,7 +17,10 @@ class ActorService
     @path(":id")
     void get(UUID _id)
     {
-        auto actor = getActor(_id);
-        render!("actor-details.dt", actor);
+        import std.algorithm : sort;
+        auto result = getActor(_id);
+        auto actor = result.actor;
+        auto countries = result.countries.sort!((a, b) => a.name < b.name);
+        render!("actor-details.dt", actor, countries);
     }
 }

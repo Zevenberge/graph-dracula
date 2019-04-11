@@ -1,9 +1,16 @@
 div
     hidden(value="#{actor.id}")
     label Name
-    input(type="text", value="#{actor.name}")
+    input#name(type="text", value="#{actor.name}")
     label Date of Birth
-    input(type="date", value="#{actor.dateOfBirth.toISOExtString}")
+    input#date(type="date", value="#{actor.dateOfBirth.toISOExtString}")
+    label Nationality
+    select#nationality
+        -foreach(country; countries)
+            -if(country.iso == actor.nationality.iso)
+                option(value="#{country.iso}", selected) #{country.name}
+            -else 
+                option(value="#{country.iso}") #{country.name}
     ul
         -foreach(film; actor.films)
             li

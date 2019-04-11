@@ -11,22 +11,26 @@ namespace Dracula.Api.Schema
         protected override void Configure(IObjectTypeDescriptor descriptor)
         {
             descriptor.Field<FilmResolver>(r => r.GetAll(default))
-                .Type<ListType<FilmType>>()
+                .Type<NonNullType<ListType<NonNullType<FilmType>>>>()
                 .Name("films");
 
             descriptor.Field<FilmResolver>(r => r.GetById(default, default))
-                .Type<FilmType>()
+                .Type<NonNullType<FilmType>>()
                 .Argument("id", d => d.Description("Identifier of the film").Type<NonNullType<UuidType>>())
                 .Name("film");
 
             descriptor.Field<ActorResolver>(r => r.GetAll(default))
-                .Type<ListType<ActorType>>()
+                .Type<NonNullType<ListType<NonNullType<ActorType>>>>()
                 .Name("actors");
 
             descriptor.Field<ActorResolver>(r => r.GetById(default, default))
-                .Type<ActorType>()
+                .Type<NonNullType<ActorType>>()
                 .Argument("id", d => d.Description("Identifier of the actor").Type<NonNullType<UuidType>>())
                 .Name("actor");
+
+            descriptor.Field<CountryResolver>(r => r.GetAll(default))
+                .Type<NonNullType<ListType<NonNullType<CountryType>>>>()
+                .Name("countries");
         }
         
     }

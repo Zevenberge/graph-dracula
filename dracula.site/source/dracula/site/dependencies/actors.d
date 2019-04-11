@@ -1,6 +1,7 @@
 module dracula.site.dependencies.actors;
 
 import std.datetime;
+import std.typecons;
 import std.uuid;
 import dracula.site.dependencies.graphql;
 
@@ -22,15 +23,18 @@ ActorListItem[] getActors()
     }).actors;
 }
 
-ActorDetails getActor(UUID id)
+alias ActorAndCountries = Tuple!(ActorDetails, "actor", Country[], "countries");
+
+ActorAndCountries getActor(UUID id)
 {
-    return query!(ActorQuery, q{
+    auto result = query!(ActorQuery, q{
             query($id : Uuid!) {
                 actor(id: $id) {
                     id
                     name
                     dateOfBirth
                     nationality {
+                        iso
                         name
                     }
                     films {
@@ -42,8 +46,13 @@ ActorDetails getActor(UUID id)
                         }
                     }
                 }
+                countries {
+                    iso
+                    name
+                }
             }
-    })(IdParameter(id)).actor;
+    })(IdParameter(id));
+    return ActorAndCountries(result.actor, result.countries);
 }
 
 class ActorDetails
@@ -57,6 +66,7 @@ class ActorDetails
 
 class Country
 {
+    string iso;
     string name;
 }
 
@@ -83,6 +93,7 @@ class ActorsQuery
 class ActorQuery
 {
     ActorDetails actor;
+    Country[] countries;
 }
 
 struct IdParameter
