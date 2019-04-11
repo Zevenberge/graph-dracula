@@ -10,6 +10,7 @@ URLRouter configureRouter()
 	router.get("/", &index);
 	router.addScripts;
     router.registerWebInterface(new ActorService);
+	router.registerRestInterface(new ActorApi);
     return router;
 }
 

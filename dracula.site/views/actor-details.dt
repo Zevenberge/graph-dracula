@@ -1,16 +1,17 @@
 div
     hidden(value="#{actor.id}")
     label Name
-    input#name(type="text", value="#{actor.name}")
+    input#name(type="text", value="#{actor.name}", onchange="inputChanged('name', this.value)")
     label Date of Birth
-    input#date(type="date", value="#{actor.dateOfBirth.toISOExtString}")
+    input#date(type="date", value="#{actor.dateOfBirth.toISOExtString}", onchange="inputChanged('dateOfBirth', this.value)")
     label Nationality
-    select#nationality
+    select#nationality(onchange="inputChanged('nationality', this.selectedOptions[0].value)")
         -foreach(country; countries)
             -if(country.iso == actor.nationality.iso)
                 option(value="#{country.iso}", selected) #{country.name}
             -else 
                 option(value="#{country.iso}") #{country.name}
+    button#submit(disabled, onclick="submit(this)") Apply
     ul
         -foreach(film; actor.films)
             li

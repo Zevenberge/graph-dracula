@@ -1,17 +1,11 @@
 module dracula.site.dependencies.actors;
 
-import std.datetime;
 import std.typecons;
 import std.uuid;
 import dracula.site.dependencies.graphql;
+import dracula.site.dto.actors;
 
-class ActorListItem
-{
-    UUID id;
-    string name;
-}
-
-ActorListItem[] getActors()
+ActorListItemDto[] getActors()
 {
     return query!(ActorsQuery, q{
             query {
@@ -23,9 +17,9 @@ ActorListItem[] getActors()
     }).actors;
 }
 
-alias ActorAndCountries = Tuple!(ActorDetails, "actor", Country[], "countries");
+alias ActorAndCountriesDto = Tuple!(ActorDetailsDto, "actor", CountryDto[], "countries");
 
-ActorAndCountries getActor(UUID id)
+ActorAndCountriesDto getActor(UUID id)
 {
     auto result = query!(ActorQuery, q{
             query($id : Uuid!) {
@@ -52,51 +46,39 @@ ActorAndCountries getActor(UUID id)
                 }
             }
     })(IdParameter(id));
-    return ActorAndCountries(result.actor, result.countries);
+    return ActorAndCountriesDto(result.actor, result.countries);
 }
 
-class ActorDetails
+void editActor(ChangeActorDto dto)
 {
-    UUID id;
-    string name;
-    Date dateOfBirth;
-    Country nationality;
-    Play[] films;
-}
-
-class Country
-{
-    string iso;
-    string name;
-}
-
-class Play
-{
-    string role;
-    Film film;
-}
-
-class Film
-{
-    UUID id;
-    string name;
-    int releaseYear;
+    auto result = query!(Tuple!(IdParameter, "editActor"), q{
+        mutation($data: EditActorInput!) {
+            editActor(data: $data) {
+                id
+            }
+        }
+    })(DataParameter!ChangeActorDto(dto));
 }
 
 private:
 
 class ActorsQuery
 {
-    ActorListItem[] actors;
+    ActorListItemDto[] actors;
 }
 
 class ActorQuery
 {
-    ActorDetails actor;
-    Country[] countries;
+    ActorDetailsDto actor;
+    CountryDto[] countries;
 }
 
 struct IdParameter
 {
     UUID id;
+}
+
+struct DataParameter(TData)
+{
+    TData data;
 }
