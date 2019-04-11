@@ -3,7 +3,7 @@ div
     label Name
     input(type="text", value="#{actor.name}")
     label Date of Birth
-    input(type="date", value="#{actor.dateOfBirth}")
+    input(type="date", value="#{actor.dateOfBirth.toISOExtString}")
     ul
         -foreach(film; actor.films)
             li
