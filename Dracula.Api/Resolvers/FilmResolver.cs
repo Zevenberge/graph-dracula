@@ -24,7 +24,7 @@ namespace Dracula.Api.Resolvers
             [Service]IFilmRepository repository,
             [Service]ICountryRepository countries)
         {
-            var country = await countries.GetByIso(data.CountryIso);
+            var country = await countries.GetByIso(data.Country);
             var film = new Film(data.Name, data.ReleaseYear, country);
             await repository.Add(film);
             return film;
@@ -35,9 +35,9 @@ namespace Dracula.Api.Resolvers
             [Service]ICountryRepository countries)
         {
             Country country = null;
-            if (!string.IsNullOrWhiteSpace(data.CountryIso))
+            if (!string.IsNullOrWhiteSpace(data.Country))
             {
-                country = await countries.GetByIso(data.CountryIso);
+                country = await countries.GetByIso(data.Country);
             }
             var film = await repository.GetById(data.Id);
             film.CorrectInformation(data.Name, data.ReleaseYear, country);

@@ -1,0 +1,21 @@
+div
+    hidden(value="#{film.id}")
+    label Title
+    input#name(type="text", value="#{film.name}", onchange="inputChanged('name', this.value)")
+    label Release year
+    input#year(type="number", min="1900", max="2030", value="#{film.releaseYear}", onchange="if(this.validity.valid) inputChanged('releaseYear', this.valueAsNumber)")
+    label Country 
+    select#country(onchange="inputChanged('country', this.selectedOptions[0].value)")
+        -foreach(country; countries)
+            -if(country.iso == film.country.iso)
+                option(value="#{country.iso}", selected) #{country.name}
+            -else 
+                option(value="#{country.iso}") #{country.name}
+    button#submit(disabled, onclick="submit(this)") Apply
+    -if(!film.actors.empty)
+        ul
+            -foreach(actor; film.actors)
+                li
+                    div.role #{actor.role}
+                    div.name #{actor.actor.name}
+                    div.nationality #{actor.actor.nationality.name}

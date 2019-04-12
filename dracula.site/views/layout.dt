@@ -6,5 +6,6 @@ html
     body
         nav
             a(href="/") Home
+            a(href="/film/") Films
             a(href="/actor/") Actors
         block body

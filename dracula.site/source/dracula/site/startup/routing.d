@@ -2,6 +2,7 @@ module dracula.site.startup.routing;
 
 import vibe.d;
 import dracula.site.pages.actors;
+import dracula.site.pages.films;
 import dracula.site.startup.scripts;
 
 URLRouter configureRouter()
@@ -11,6 +12,8 @@ URLRouter configureRouter()
 	router.addScripts;
     router.registerWebInterface(new ActorService);
 	router.registerRestInterface(new ActorApi);
+	router.registerWebInterface(new FilmService);
+	router.registerRestInterface(new FilmApi);
     return router;
 }
 

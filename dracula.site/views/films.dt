@@ -1,0 +1,11 @@
+extends layout
+
+block body
+    link(rel= 'stylesheet', type='text/css', href='/styles/details.css')
+    script(src='/scripts/films.js', defer)
+    button#new(onclick="createFilm()") New film
+    #masterdetail
+        ul#films.selectable
+            - foreach(film; films)
+                li(onclick="filmSelected('#{film.id}')") #{film.name}
+        #details

@@ -8,7 +8,7 @@ namespace Dracula.Api.Schema
         public Guid Id { get; set; }
         public string Name { get; set; }
         public int? ReleaseYear { get; set; }
-        public string CountryIso { get; set; }
+        public string Country { get; set; }
         public class Type : InputObjectType<EditFilm>
         {
             protected override void Configure(IInputObjectTypeDescriptor<EditFilm> descriptor)
