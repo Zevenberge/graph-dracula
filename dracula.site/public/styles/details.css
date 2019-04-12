@@ -8,9 +8,17 @@ button {
     margin: 8px;
 }
 
-button:hover {
+#submit:enabled {
+    background: darkslategrey;
+}
+
+button:enabled:hover {
     background: lightyellow;
     color: midnightblue;
+}
+
+#submit:enabled:hover {
+    background: lightyellow;
 }
 
 #new {
@@ -34,11 +42,34 @@ li {
     color: midnightblue;
 }
 
+#masterdetail {
+    display: flex;
+}
+
 ul {
     list-style-type: none;
+    border: antiquewhite;
+    border-width: thin;
+    border-style: dashed;
     width: 30%;
+    padding-left: 0px;
 }
 
 #details {
-    width: 60%;
+    width: 100%;
+    margin-top: 16px;
+    padding: 8px;
+}
+
+#details > div {
+    border: antiquewhite;
+    border-width: thick;
+    border-style: solid;
+    padding: 10px;
+
+}
+
+#details label {
+    color: blanchedalmond;
+    font-weight: bold;
 }
