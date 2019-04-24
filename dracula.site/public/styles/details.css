@@ -73,3 +73,9 @@ ul {
     color: blanchedalmond;
     font-weight: bold;
 }
+
+#castings > ul {
+    align-content: flex-start;
+    display: flex;
+    width: max-content;
+}

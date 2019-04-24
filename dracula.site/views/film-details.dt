@@ -12,10 +12,11 @@ div
             -else 
                 option(value="#{country.iso}") #{country.name}
     button#submit(disabled, onclick="submit(this)") Apply
-    -if(!film.actors.empty)
-        ul
-            -foreach(actor; film.actors)
-                li
-                    div.role #{actor.role}
-                    div.name #{actor.actor.name}
-                    div.nationality #{actor.actor.nationality.name}
+    #castings
+        -if(!film.actors.empty)
+            ul
+                -foreach(actor; film.actors)
+                    li
+                        div.role #{actor.role}
+                        div.name #{actor.actor.name}
+                        div.nationality #{actor.actor.nationality.name}
