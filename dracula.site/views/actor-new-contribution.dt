@@ -1,0 +1,9 @@
+div
+    select#film(onchange="inputContributionChanged('film', this.selectedOptions[0].value)")
+        -foreach(film; films)
+            option(value="#{film.id}") #{film.name}
+    select#role(onchange="inputContributionChanged('role', this.selectedOptions[0].value)")
+        -foreach(role; roles)
+            option(value="#{role}") #{role}
+    button#save(disabled, onclick="saveContribution(this)") Save
+    button#cancel(onclick="cancelContribution()") Cancel

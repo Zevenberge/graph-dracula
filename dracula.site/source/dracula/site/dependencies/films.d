@@ -88,12 +88,3 @@ class FilmQuery
     CountryDto[] countries;
 }
 
-struct IdParameter
-{
-    UUID id;
-}
-
-struct DataParameter(TData)
-{
-    TData data;
-}

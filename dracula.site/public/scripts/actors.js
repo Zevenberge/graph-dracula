@@ -16,6 +16,16 @@ class ActorChangeSet {
     }
 }
 
+class ContributionChangeSet {
+    constructor(id) {
+        this.actor = id;
+    }
+
+    canSubmit() {
+        return this.film && this.role;
+    }
+}
+
 async function createActor() {
     let result = await fetch(`/actor/new`);
     let page = await result.text();
@@ -40,7 +50,7 @@ function inputChanged(name, newValue) {
 
 async function submit(button) {
     button.disabled = true;
-    let response = await postAsync('/api/actor/edit');
+    let response = await postAsync('/api/actor/edit', details.changeSet);
     if(!response.ok) {
         button.disabled = false;
         throw "It's dead Jim";
@@ -49,7 +59,7 @@ async function submit(button) {
 
 async function create(button) {
     button.disabled = true;
-    let response = await postAsync('/api/actor/create');
+    let response = await postAsync('/api/actor/create', details.changeSet);
     if(!response.ok) {
         button.disabled = false;
         throw "It's dead Jim";
@@ -59,12 +69,46 @@ async function create(button) {
     }
 }
 
-function postAsync(url) {
+async function addFilm(button) {
+    let response = await fetch(`/actor/add`);
+    if(response.ok) {
+        let content = await response.text();
+        let element = document.getElementById('newFilm');
+        element.innerHTML = content;
+        details.contribution = new ContributionChangeSet(details.changeSet.id);
+    }
+}
+
+function inputContributionChanged(name, newValue) {
+    details.contribution[name] = newValue;
+    let button = document.getElementById('save');
+    button.disabled = !details.contribution.canSubmit();
+}
+
+async function saveContribution(button) {
+    button.disabled = true;
+    let response = await postAsync('/api/actor/contribution', details.contribution);
+    if(!response.ok) {
+        button.disabled = false;
+        throw "Not now son";
+    } else {
+        let content = await response.json();
+        await actorSelected(content);
+    }
+}
+
+function cancelContribution() {
+    details.contribution = undefined;
+    let element = document.getElementById('newFilm');
+    element.innerHTML = "";
+}
+
+function postAsync(url, data) {
     return fetch(url, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({dto: details.changeSet})
+        body: JSON.stringify({dto: data})
     });
 }

@@ -1,5 +1,6 @@
 module dracula.site.dependencies.graphql;
 
+import std.uuid;
 import vibe.core.log;
 import vibe.data.json;
 import vibe.http.client;
@@ -32,4 +33,14 @@ auto query(TQuery, string ql, TParams...)(TParams params)
     scope(exit) response.disconnect;
     logInfo(json.toString);
     return json.deserializeJson!Response.data;
+}
+
+struct IdParameter
+{
+    UUID id;
+}
+
+struct DataParameter(TData)
+{
+    TData data;
 }
