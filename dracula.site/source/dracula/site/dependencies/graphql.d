@@ -25,14 +25,17 @@ auto query(TQuery, string ql, TParams...)(TParams params)
         request.method = HTTPMethod.POST;
         request.writeJsonBody(q);
     });
-    struct Response
-    {
-        TQuery data;
-    }
-    auto json = response.readJson;
     scope(exit) response.disconnect;
-    logInfo(json.toString);
-    return json.deserializeJson!Response.data;
+    static if(!is(TQuery == void)) 
+    {
+        struct Response
+        {
+            TQuery data;
+        }
+        auto json = response.readJson;
+        logInfo(json.toString);
+        return json.deserializeJson!Response.data;
+    }
 }
 
 struct IdParameter

@@ -1,5 +1,6 @@
 module dracula.site.dependencies.casting;
 
+import std.uuid;
 import std.typecons;
 import dracula.site.dependencies.graphql;
 import dracula.site.dto.contribution;
@@ -13,4 +14,13 @@ void createContribution(CreateContributionDto dto)
             }
         }
     })(DataParameter!CreateContributionDto(dto));
+}
+
+void deleteContribution(UUID id)
+{
+    query!(void, q{
+        mutation($id: Uuid!) {
+            deleteCasting(id: $id)
+        }
+    })(IdParameter(id));
 }

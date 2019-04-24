@@ -33,6 +33,7 @@ ActorAndCountriesDto getActor(UUID id)
                         name
                     }
                     films {
+                        id
                         role
                         film {
                             id

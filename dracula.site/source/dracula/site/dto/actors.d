@@ -23,6 +23,7 @@ class ActorListItemDto
 
 class PlayDto
 {
+    UUID id;
     string role;
     FilmDto film;
 }

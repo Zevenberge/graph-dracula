@@ -52,6 +52,7 @@ interface IActorApi
     UUID postCreate(CreateActorDto dto);
     void postEdit(ChangeActorDto dto);
     UUID postContribution(CreateContributionDto dto);
+    void deleteContribution(UUID dto);
 }
 
 class ActorApi : IActorApi
@@ -73,5 +74,11 @@ class ActorApi : IActorApi
     {
         createContribution(dto);
         return dto.actor;
+    }
+
+    @bodyParam("dto")
+    void deleteContribution(UUID dto)
+    {
+        .deleteContribution(dto);
     }
 }

@@ -79,3 +79,16 @@ ul {
     display: flex;
     width: max-content;
 }
+
+li > .delete {
+    font-size: 25px;
+    color: chocolate;
+    position: relative;
+    top: -5px;
+    width: min-content;
+    left: 90%;
+}
+
+li > .delete:hover {
+    cursor: pointer;
+}

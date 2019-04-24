@@ -17,6 +17,7 @@ div
             ul
                 -foreach(film; actor.films)
                     li
+                        div.delete(onclick="deleteContribution('#{film.id}')") X
                         div.title #{film.film.name}
                         div.year #{film.film.releaseYear}
                         div.role #{film.role}

@@ -97,6 +97,15 @@ async function saveContribution(button) {
     }
 }
 
+async function deleteContribution(id) {
+    let response = await deleteAsync('/api/actor/contribution', id);
+    if(!response.ok) {
+        throw "Error (moest van Bart)";
+    } else {
+        await actorSelected(details.changeSet.id);
+    }
+}
+
 function cancelContribution() {
     details.contribution = undefined;
     let element = document.getElementById('newFilm');
@@ -106,6 +115,16 @@ function cancelContribution() {
 function postAsync(url, data) {
     return fetch(url, {
         method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({dto: data})
+    });
+}
+
+function deleteAsync(url, data) {
+    return fetch(url, {
+        method: "DELETE",
         headers: {
             "Content-Type": "application/json"
         },
