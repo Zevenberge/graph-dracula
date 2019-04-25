@@ -20,3 +20,4 @@ div
                         div.role #{actor.role}
                         div.name #{actor.actor.name}
                         div.nationality #{actor.actor.nationality.name}
+    a(href="/film/#{film.id}/edit-cast") Edit cast

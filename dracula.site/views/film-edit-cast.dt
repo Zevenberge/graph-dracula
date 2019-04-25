@@ -1,0 +1,37 @@
+extends layout
+
+block body
+    link(rel= 'stylesheet', type='text/css', href='/styles/details.css')
+    link(rel= 'stylesheet', type='text/css', href='/styles/casting.css')
+    script(src='/scripts/cast.js', defer)
+    hidden#id(value="#{id}")
+    div#general
+        p #{name}
+    div#casting
+        ul
+            -foreach(c; contributions)
+                li
+                    div.delete(onclick="deleteContribution('#{c.id}', this)") X
+                    select.actor(onchange="contributionChanged('actor', '#{c.id}', this.selectedOptions[0].value)")
+                        -foreach(a; actors)
+                            -if(c.actor.id == a.id)
+                                option(value="#{a.id}", selected) #{a.name}
+                            -else
+                                option(value="#{a.id}") #{a.name}
+                    select.role(onchange="contributionChanged('role', '#{c.id}', this.selectedOptions[0].value)")
+                        -foreach(role; roles)
+                            -if(c.role == role)
+                                option(value="#{role}", selected) #{role}
+                            -else
+                                option(value="#{role}") #{role}
+        ul#list
+    button(onclick="submit('#{id}')") Submit
+    #new
+        p New contribution
+        select.actor
+            -foreach(a; actors)
+                option(value="#{a.id}") #{a.name}
+        select.role
+            -foreach(role; roles)
+                option(value="#{role}") #{role}
+        button(onclick="addContribution()") Add

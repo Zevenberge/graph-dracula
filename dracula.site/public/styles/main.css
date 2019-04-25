@@ -8,20 +8,24 @@ nav {
     margin-bottom: 30px;
 }
 
-nav > a {
+a {
     padding: 5px;
     margin: 5px;
     font-size: 20;
     font-weight: bold;
     border-style: solid;
-    border-color: black;
+    border-color: antiquewhite;
     background-color: midnightblue;
     color: blanchedalmond;
 }
 
-nav > a:hover {
+a:hover {
     background: lightyellow;
     color: midnightblue;
+}
+
+nav > a {
+    border-color: black;
 }
 
 p {

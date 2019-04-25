@@ -3,8 +3,12 @@ module dracula.site.pages.films;
 import std.uuid;
 import vibe.web.common;
 import vibe.web.web;
-import dracula.site.dependencies.films;
+import dracula.site.dependencies.actors;
+import dracula.site.dependencies.casting;
 import dracula.site.dependencies.countries;
+import dracula.site.dependencies.films;
+import dracula.site.dependencies.role;
+import dracula.site.dto.contribution;
 import dracula.site.dto.films;
 
 @path("/film")
@@ -32,6 +36,18 @@ class FilmService
         auto countries = getCountries();
         render!("film-create.dt", countries);
     }
+
+    @path(":id/edit-cast")
+    void getEditCast(UUID _id)
+    {
+        auto data = getCast(_id);
+        auto contributions = data.actors;
+        auto id = _id;
+        auto name = data.name;
+        auto actors = getActors;
+        auto roles = getRoles;
+        render!("film-edit-cast.dt", id, name, contributions, actors, roles);
+    }
 }
 
 @path("/api/film")
@@ -39,7 +55,10 @@ interface IFilmApi
 {
     UUID postCreate(CreateFilmDto dto);
     void postEdit(ChangeFilmDto dto);
+    @path("edit-cast")
+    void postEditCast(EditCastDto dto);
 }
+
 class FilmApi : IFilmApi
 {
     @bodyParam("dto")
@@ -52,5 +71,11 @@ class FilmApi : IFilmApi
     void postEdit(ChangeFilmDto dto)
     {
         editFilm(dto);
+    }
+
+    @bodyParam("dto")
+    void postEditCast(EditCastDto dto)
+    {
+        editCast(dto);
     }
 }
